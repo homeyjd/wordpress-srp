@@ -3,6 +3,7 @@ Wordpress-SRP
 
 #### WARNING: This module is in heavy development and not ready for production servers. 
 
+
 Why SRP
 --------------
 
@@ -22,7 +23,15 @@ Login framework for WordPress
 
 The login page for WordPress still suffers from the same vulnerability that other web apps do -- the password is transmitted in plain text to the server. While many techies might propose simply adding SSL certificates, some users may not have that option, host in a single-IP configuration, or not have the technical skill to do so. The goal of the WordPress SRP project is to easily replace WordPress's built-in authentication with a JavaScript-based SRP login. For more recent browsers, this will allow a much more secure way to login to WordPress installations.
 
-<em>Credit: Much original code and ideas were derived from sqs's project [WordPress TLS-SRP Authentication][ghtls].</em>
+
+
+
+Credits
+===============
+
+* Much original code and ideas were derived from sqs's project [WordPress TLS-SRP Authentication][ghtls]
+* Cryptographic functions open-source at [Google Code][google code]
+* JavaScript SRP implementation borrowed heavily from [Cipperz Library][clipperz]
 
 
 More Links
@@ -36,6 +45,8 @@ More Links
 [wordpress]: http://wordpress.org/ "WordPress Blog Tool"
 [wpsec]: http://wordpress.org/extend/plugins/better-wp-security/ "Better WP Security: WordPress Plugin"
 [ghtls]: https://github.com/sqs/wordpress-tls-srp-authentication/ "WordPress TLS-SRP Authentication"
+[google code]: http://code.google.com/p/crypto-js/ "CryptoJS at Google Code"
+[clipperz]: http://clipperz.com/open_source/javascript_crypto_library "Clipperz JavaScript Crypto Library"
 [stanford]: http://srp.stanford.edu/ "Stanford SRP Homepage"
 [wiki]: http://en.wikipedia.org/wiki/Secure_Remote_Password_protocol "Secure Remote Password Protocol"
 [so]: http://stackoverflow.com/questions/4638967/secure-remote-password-srp-in-laymen-terms "SRP in Laymen Terms"

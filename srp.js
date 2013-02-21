@@ -61,6 +61,10 @@ function depends(url) {
 
 // CryptoJS Library @ http://code.google.com/p/crypto-js/
 depends('http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js');
+// Clipperz
+depends('Clipperz/ByteArray.js');
+depends('Clipperz/Crypto/BigInt.js');
+depends('Clipperz/Crypto/PRNG.js');
 
 if (typeof(SRP) == 'undefined') { SRP = {}; }
 
@@ -155,11 +159,11 @@ SRP = {
 	//-------------------------------------------------------------------------
 
 	'g': function() {
-		if (Clipperz.Crypto.SRP._g == null) {
-			Clipperz.Crypto.SRP._g = new Clipperz.Crypto.BigInt(2);	//	eventually 5 (as suggested on the Diffi-Helmann documentation)
+		if (SRP._g == null) {
+			SRP._g = new Clipperz.Crypto.BigInt(2);	//	eventually 5 (as suggested on the Diffi-Helmann documentation)
 		}
 		
-		return Clipperz.Crypto.SRP._g;
+		return SRP._g;
 	},
 	
 	'hash': function(input) {
@@ -212,8 +216,8 @@ SRP.Connection.prototype = {
 			this._A = SRP.g().powerModule(this.a(), SRP.n());
 			
 			if (this._A.equals(0)) {
-MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'A' to 0.");
-				throw Clipperz.Crypto.SRP.exception.InvalidValue;
+//MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'A' to 0.");
+				throw "SRP: invalid value";
 			}
 //MochiKit.Logging.logDebug("SRP A: " + this._A);
 		}
@@ -244,8 +248,8 @@ MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'A' to 
 			this._B = aValue;
 //MochiKit.Logging.logDebug("SRP B: " + this._B);
 		} else {
-MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'B' to 0.");
-			throw Clipperz.Crypto.SRP.exception.InvalidValue;
+//MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'B' to 0.");
+			throw "SRP: invalid value";
 		}
 	},
 	
@@ -333,7 +337,7 @@ MochiKit.Logging.logError("Clipperz.Crypto.SRP.Connection: trying to set 'B' to 
 		
 		s = aSalt;
 		x = this.stringHash(s + this.P());
-		v = Clipperz.Crypto.SRP.g().powerModule(new Clipperz.Crypto.BigInt(x, 16), Clipperz.Crypto.SRP.n());
+		v = SRP.g().powerModule(new Clipperz.Crypto.BigInt(x, 16), SRP.n());
 
 		result = {};
 		result['C'] = this.C();
